@@ -1,0 +1,36 @@
+.container {
+  height: 1100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center
+}
+
+.userinfo-box {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 250rpx;
+}
+
+.userinfo-avatar {
+  height: 100%;
+  width: 100%;
+}
+
+.weather-box {
+  height: 200rpx;
+  width: 200rpx;
+}
+
+.weather {
+  height: 100%;
+  width: 100%;
+}
+
+.slogan-box {
+  margin-top: 250rpx;
+  font-size: 46rpx;
+  color: #353535;
+}
+
+@import "../../asset/css/ripples.wxss"

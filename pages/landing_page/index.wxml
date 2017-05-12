@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo-box">
+    <image class="userinfo-avatar ripple rotateIn" src="{{ emoji_url }}" background-size="cover"></image>
+  </view>
+  <view class="slogan-box">
+    Use <span style="color: #29DDB9">Emoji</span> to Record <span style="color: #29DDB9">Life</span>
+  </view>
+  <view class="weather-box">
+    <!--<image class="weather" src="{{ weather_url }}"></image>-->
+  </view>
+</view>

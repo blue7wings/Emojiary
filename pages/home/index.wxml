@@ -1,0 +1,91 @@
+<view class="container">
+    <view class="title">
+        <view class="left-arrow" bindtap="prev_month"> <image src="/asset/images/left-arrow.svg" class="arrow"></image> </view>
+        <picker mode="date" value="{{date}}" fields="month" start="{{start_date}}" end="{{end_date}}" bindchange="select_date">
+            <view class="date-picker"> {{now_date}} </view>
+        </picker>
+        <view class="right-arrow" bindtap="next_month"> <image src="/asset/images/right-arrow.svg" class="arrow"></image> </view>
+    </view>
+    <view class="divider-box">
+        <image src="/asset/images/divider.svg" class="divider"></image>
+    </view>
+    <view class="calender">
+        <view class="calender-header">
+            <image src="/asset/images/SUN.svg" class="week-item"></image>
+            <image src="/asset/images/MON.svg" class="week-item"></image>
+            <image src="/asset/images/TUE.svg" class="week-item"></image>
+            <image src="/asset/images/WED.svg" class="week-item"></image>
+            <image src="/asset/images/THU.svg" class="week-item"></image>
+            <image src="/asset/images/FRI.svg" class="week-item"></image>
+            <image src="/asset/images/SAT.svg" class="week-item"></image>
+        </view>
+        <view class="calender-body">
+            <block wx:for="{{ date_arr }}" wx:key="key">
+                <view class="date-item date-enabled-{{item.enabled}} date-today-{{item.today}} ">
+                    <span>{{item.date}}</span>
+                    <block wx:if="{{item.emotion_value}}">
+                        <image src="/asset/images/circle-{{item.emotion_value}}.svg" class="circle"></image>
+                    </block>
+                </view>
+            </block>
+
+        </view>
+    </view>
+
+    <view class="diary">
+        <block wx:for="{{ items }}" wx:key="{{key}}">
+            <view class="diary-item" key="{{key}}" bindtap="detail" data-key="{{ item.key }}">
+                <view class="diary-date">
+                    <view class="date">{{ item.value['date']}}</view>
+                    <view class="day">{{ item.value['week']}}</view>
+                </view>
+                <image src="/asset/images/virtical-divider.svg" class="virtical-divider"></image>
+                <view class="emoji">
+                    <image src="/asset/emojis/{{ item.value['emoji_type']}}.svg" class="emoji-image"></image>
+                </view>
+                <image src="/asset/images/virtical-divider.svg" class="virtical-divider"></image>
+                <view class="text">{{ item.value['text'] }}</view>
+                <image class="more-arrow" src="/asset/images/more-arrow.svg"></image>
+            </view>
+        </block>
+
+
+    </view>
+</view>
+<image src="/asset/images/add-button.svg" class="add-button" bindtap="blank_modal"></image>
+<view class="cover" wx:if="{{modal_visiable}}" bindtap="cancle"></view>
+<view class="modal ripple bounceInDown" wx:if="{{modal_visiable}}">
+    <view class="create-box">
+        <image src="/asset/images/close-button.svg" class="close-button" bindtap="cancle"></image>
+        <image src="/asset/emojis/{{ emoji_indicator }}.svg" class="emoji-image"></image>
+        <view class="emoji-select-box">
+            <picker-view indicator-style="height: 50px;" value="{{ emoji_defaul_value }}" class="emoji-picker" bindchange="select_emoji">
+                <picker-view-column>
+                    <view style="line-height: 50px; color: #797979">伤心的表情</view>
+                    <view style="line-height: 50px; color: #797979">开心的表情</view>
+                    <view style="line-height: 50px; color: #797979">平淡的表情</view>
+                </picker-view-column>
+                <picker-view-column>
+                    <view wx:for="{{ emoji_list }}" wx:key="key">
+                        <image src="/asset/emojis/{{ item }}.svg" style="height: 100%; width: 100rpx;"></image>
+                    </view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+        <block wx:if="{{ is_newbee }}">
+            <textarea placeholder="选择表达今天心情的emoji, 或者在此写点文字, enjoy ~ ~" value="{{ text }}" bindinput="input"  placeholder-style="color:#9B9B9B;font-size:26rpx;line-height:46rpx" class="text"/>
+        </block>
+        <block wx:else>
+            <textarea placeholder="写点什么,当然你也可以什么都不写" value="{{ text }}" bindinput="input"  placeholder-style="color:#9B9B9B;font-size:26rpx;" class="text"/>
+        </block>
+        <view class="button-box">
+            <block wx:if="{{ delete_button_visiable}}">
+                <view class="delete-button" bindtap="delete" style="visibility: show">删除</view>
+            </block>
+            <block wx:else>
+                <view class="delete-button" bindtap="delete" style="visibility: hidden">删除</view>
+            </block>
+            <view class="submit-button" bindtap="save">保存</view>
+        </view>
+    </view>
+</view>
