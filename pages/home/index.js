@@ -21,7 +21,6 @@ Page({
         'text': '',
         'item_key': '', //当前条目的key
         'delete_button_visiable': false ,//modal中的删除按钮是否可见
-        'is_newbee': false // 是不是第一次使用
     },
     // 初始化页面数据
     page_init: function(year, month) {
@@ -51,14 +50,7 @@ Page({
         let emojis = util.get_emojis()
 
         this.page_init(year, month)
-        // let is_newbee = util.is_newbee()
-        let is_newbee = false
-        if(is_newbee) {
-            this.blank_modal()
-        }
-        this.setData({
-            'is_newbee': is_newbee
-        })
+        
     },
 
     

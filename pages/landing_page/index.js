@@ -1,8 +1,7 @@
 let app = getApp()
 Page({
 	data: {
-		emoji_url : '/asset/emojis/slightly-smiling-face.svg',
-		weather_url: '/asset/emojis/sun-behind-cloud.svg'
+		emoji_url : '/asset/emojis/slightly-smiling-face.svg'
 	},
 	onLoad: function () {
 		let emojis = app.emojis
@@ -11,11 +10,14 @@ Page({
 		this.setData({
 			emoji_url : '/asset/emojis/' + emoji_name + '.svg'
 		})
+		console.log(this.data.emoji_url)
 		wx.login({
 			success: function (data) {
 				let app_id = 'wx9c587a96c5c6c68e'
 				let app_secret = 'fb7e4a5d08cc42ded99fe8050b00a004'
 				let url = 'https://api.weixin.qq.com/sns/jscode2session?appid='+app_id+'&secret='+app_secret+'&js_code='+data.code+'&grant_type=authorization_code'
+				// 注意：在小程序项目->request合法域名 配置项中
+				// 一定要把 https://api.weixin.qq.com 添加进去
 				wx.request({
 					url: url,
 					success: function(res){
